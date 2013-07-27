@@ -5,7 +5,7 @@ raise "Need to specify an argumnt" if ARGV.empty?
 domain = ARGV.first
 wwwdomain = "www.#{domain}"
 
-def blockLine line, ip, dom
+def block_line line, ip, dom
   puts "BLOCKING LINE: #{line}"
   "127.0.0.1  #{dom}\n"
 end
@@ -13,20 +13,20 @@ end
 
 f = File.open('/private/etc/hosts', 'r')
 
-blockedlines = []
+blocked_lines = []
 newlines = f.lines.map do |line|
   if (m = regex.match line)
     ip, dom = m.captures
     if [domain, wwwdomain].include? dom
-      line = blockLine line, ip, dom
-      blockedlines << line
+      line = block_line line, ip, dom
+      blocked_lines << line
     end
   end
   line
 end
 f.close
 
-puts "Blocked #{blockedlines.count} line(s)", blockedlines
+puts "Blocked #{blocked_lines.count} line(s)", blocked_lines
 
 out = File.open('/private/etc/hosts', 'w')
 newlines.each do |line|
