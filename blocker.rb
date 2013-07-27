@@ -14,7 +14,7 @@ end
 f = File.open('/private/etc/hosts', 'r')
 
 blocked_lines = []
-newlines = f.lines.map do |line|
+new_lines = f.lines.map do |line|
   if (m = regex.match line)
     ip, dom = m.captures
     if [domain, wwwdomain].include? dom
@@ -29,7 +29,7 @@ f.close
 puts "Blocked #{blocked_lines.count} line(s)", blocked_lines
 
 out = File.open('/private/etc/hosts', 'w')
-newlines.each do |line|
+new_lines.each do |line|
   out.write line
 end
 out.close

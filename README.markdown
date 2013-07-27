@@ -3,6 +3,16 @@ Host Blocker
 
 A super simple script to uncomment entries in your hosts file.
 
+Why?
+----
+
+I spend a lot of time editing domains from my hosts file: mostly to block sites that are distracting (facebook, youtube, reddit, etc).
+Occasionally however, I need to unblock a site (e.g., to look up a friend's contact info on Facebook) -- I do this by commenting out the line in the hosts file.
+
+This script re-blocks domains by uncommenting existing entries.
+
+There's no unblocking script -- if I want to unblock a distraction, I still have to do it manually.
+
 Usage
 -----
 
