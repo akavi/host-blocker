@@ -1,3 +1,5 @@
+#! /usr/bin/ruby
+
 regex = /^\s*#\s*(\S*)\s*(\S*)/
 raise "Need to specify an argumnt" if ARGV.empty?
 domain = ARGV.first
