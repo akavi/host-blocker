@@ -1,24 +1,26 @@
 #! /usr/bin/ruby
 
 regex = /^\s*#\s*(\S*)\s*(\S*)/
-raise "Need to specify an argumnt" if ARGV.empty?
-domain = ARGV.first
-wwwdomain = "www.#{domain}"
+hostfile_path = '/private/etc/hosts'
 
-def block_line line, ip, dom
+def block_line line, dom
   puts "BLOCKING LINE: #{line}"
   "127.0.0.1  #{dom}\n"
 end
 
+raise "Need to specify an argument" if ARGV.empty?
 
-f = File.open('/private/etc/hosts', 'r')
+domain = ARGV.first
+wwwdomain = "www.#{domain}"
+
+f = File.open(hostfile_path, 'r')
 
 blocked_lines = []
 new_lines = f.lines.map do |line|
   if (m = regex.match line)
     ip, dom = m.captures
     if [domain, wwwdomain].include? dom
-      line = block_line line, ip, dom
+      line = block_line line, dom
       blocked_lines << line
     end
   end
