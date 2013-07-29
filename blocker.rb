@@ -9,9 +9,7 @@ def block_line line, dom
 end
 
 raise "Need to specify an argument" if ARGV.empty?
-
-domain = ARGV.first
-wwwdomain = "www.#{domain}"
+domains = ARGV.map { |d| [d, "www.#{d}"] }.flatten
 
 f = File.open(hostfile_path, 'r')
 
@@ -19,7 +17,7 @@ blocked_lines = []
 new_lines = f.lines.map do |line|
   if (m = regex.match line)
     ip, dom = m.captures
-    if [domain, wwwdomain].include? dom
+    if domains.include? dom
       line = block_line line, dom
       blocked_lines << line
     end
